@@ -18,8 +18,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="vi">
-      <body className={inter.className}>
-        <div className="flex h-screen bg-gray-100">
+      <body className={`${inter.className} bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100`}>
+        <div className="flex h-screen bg-gray-100 dark:bg-gray-900">
           <Sidebar />
           <main className="flex-1 overflow-auto">
             <div className="p-6">
