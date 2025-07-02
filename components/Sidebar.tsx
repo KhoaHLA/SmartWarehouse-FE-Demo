@@ -14,7 +14,8 @@ import {
   Settings,
   BarChart3,
   ChevronDown,
-  ChevronRight
+  ChevronRight,
+  Menu
 } from 'lucide-react'
 import LoginModal from './LoginModal'
 import ConfirmLogoutModal from './ConfirmLogoutModal'
@@ -86,6 +87,7 @@ export default function Sidebar() {
   const [loggedIn, setLoggedIn] = useState(false)
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false)
   const [showProfile, setShowProfile] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   useEffect(() => {
     setLoggedIn(!!localStorage.getItem('tvl_logged_in'))
@@ -119,130 +121,165 @@ export default function Sidebar() {
   }
 
   return (
-    <div className="flex flex-col w-64 bg-gray-900 text-white h-screen">
-      {/* Logo - Fixed at top */}
-      <div className="flex-shrink-0 p-6 border-b border-gray-800">
-        <h1 className="text-xl font-bold">Smart Warehouse</h1>
-        <p className="text-sm text-gray-400">Phần mềm quản lý kho bãi</p>
-      </div>
+    <>
+      {/* Nút menu cho mobile */}
+      <button
+        className="fixed top-4 left-4 z-50 md:hidden bg-gray-900 text-white p-2 rounded shadow focus:outline-none"
+        onClick={() => setMobileOpen(true)}
+        aria-label="Mở menu"
+      >
+        <Menu className="w-7 h-7" />
+      </button>
 
-      {/* Navigation - Scrollable */}
-      {loggedIn && (
-        <nav className="flex-1 overflow-y-auto hide-scrollbar">
-          <div className="p-4">
-            <ul className="space-y-2">
-              {menuItems.map((item) => {
-                const Icon = item.icon
-                const hasSubmenu = item.submenu && item.submenu.length > 0
-                const isExpanded = expandedItems.includes(item.title)
-                const isSubActive = hasSubmenu && isSubmenuActive(item.submenu)
+      {/* Sidebar cho PC và mobile */}
+      {/* PC: luôn hiển thị, Mobile: slide-in overlay */}
+      <div>
+        {/* Overlay cho mobile */}
+        {mobileOpen && (
+          <div
+            className="fixed inset-0 z-40 bg-black bg-opacity-40 md:hidden"
+            onClick={() => setMobileOpen(false)}
+          />
+        )}
+        <div
+          className={`
+            fixed top-0 left-0 z-50 h-screen w-64 bg-gray-900 text-white flex flex-col
+            transition-transform duration-300
+            md:static md:translate-x-0 md:flex
+            ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}
+            md:translate-x-0
+          `}
+          style={{ maxWidth: '100vw' }}
+        >
+          {/* Logo - Fixed at top */}
+          <div className="flex-shrink-0 p-6 border-b border-gray-800">
+            <h1 className="text-xl font-bold">TVL Quản Lý Kho</h1>
+            <p className="text-sm text-gray-400">Phần mềm quản lý kho hiện đại</p>
+          </div>
 
-                return (
-                  <li key={item.title}>
-                    {hasSubmenu ? (
-                      <div>
-                        <button
-                          onClick={() => toggleExpanded(item.title)}
-                          className={`w-full flex items-center justify-between px-3 py-2 rounded-lg transition-colors ${
-                            isSubActive 
-                              ? 'bg-blue-600 text-white' 
-                              : 'text-gray-300 hover:bg-gray-800 hover:text-white'
-                          }`}
-                        >
-                          <div className="flex items-center">
+          {/* Navigation - Scrollable */}
+          {loggedIn && (
+            <nav className="flex-1 overflow-y-auto hide-scrollbar">
+              <div className="p-4">
+                <ul className="space-y-2">
+                  {menuItems.map((item) => {
+                    const Icon = item.icon
+                    const hasSubmenu = item.submenu && item.submenu.length > 0
+                    const isExpanded = expandedItems.includes(item.title)
+                    const isSubActive = hasSubmenu && isSubmenuActive(item.submenu)
+
+                    return (
+                      <li key={item.title}>
+                        {hasSubmenu ? (
+                          <div>
+                            <button
+                              onClick={() => {
+                                toggleExpanded(item.title)
+                                if (mobileOpen) setMobileOpen(false)
+                              }}
+                              className={`w-full flex items-center justify-between px-3 py-2 rounded-lg transition-colors ${
+                                isSubActive 
+                                  ? 'bg-blue-600 text-white' 
+                                  : 'text-gray-300 hover:bg-gray-800 hover:text-white'
+                              }`}
+                            >
+                              <div className="flex items-center">
+                                <Icon className="h-5 w-5 mr-3" />
+                                <span>{item.title}</span>
+                              </div>
+                              {isExpanded ? (
+                                <ChevronDown className="h-4 w-4" />
+                              ) : (
+                                <ChevronRight className="h-4 w-4" />
+                              )}
+                            </button>
+                            {isExpanded && (
+                              <ul className="ml-8 mt-2 space-y-1">
+                                {item.submenu.map((subItem) => (
+                                  <li key={subItem.title}>
+                                    <Link
+                                      href={subItem.href}
+                                      className={`block px-3 py-2 rounded-lg transition-colors ${
+                                        isActive(subItem.href)
+                                          ? 'bg-blue-600 text-white'
+                                          : 'text-gray-400 hover:bg-gray-800 hover:text-white'
+                                      }`}
+                                      onClick={() => setMobileOpen(false)}
+                                    >
+                                      {subItem.title}
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
+                          </div>
+                        ) : (
+                          <Link
+                            href={item.href || '#'}
+                            className={`flex items-center px-3 py-2 rounded-lg transition-colors ${
+                              isActive(item.href || '')
+                                ? 'bg-blue-600 text-white'
+                                : 'text-gray-300 hover:bg-gray-800 hover:text-white'
+                            }`}
+                            onClick={() => setMobileOpen(false)}
+                          >
                             <Icon className="h-5 w-5 mr-3" />
                             <span>{item.title}</span>
-                          </div>
-                          {isExpanded ? (
-                            <ChevronDown className="h-4 w-4" />
-                          ) : (
-                            <ChevronRight className="h-4 w-4" />
-                          )}
-                        </button>
-                        
-                        {isExpanded && (
-                          <ul className="ml-8 mt-2 space-y-1">
-                            {item.submenu.map((subItem) => (
-                              <li key={subItem.title}>
-                                <Link
-                                  href={subItem.href}
-                                  className={`block px-3 py-2 rounded-lg transition-colors ${
-                                    isActive(subItem.href)
-                                      ? 'bg-blue-600 text-white'
-                                      : 'text-gray-400 hover:bg-gray-800 hover:text-white'
-                                  }`}
-                                >
-                                  {subItem.title}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
+                          </Link>
                         )}
-                      </div>
-                    ) : (
-                      <Link
-                        href={item.href || '#'}
-                        className={`flex items-center px-3 py-2 rounded-lg transition-colors ${
-                          isActive(item.href || '')
-                            ? 'bg-blue-600 text-white'
-                            : 'text-gray-300 hover:bg-gray-800 hover:text-white'
-                        }`}
-                      >
-                        <Icon className="h-5 w-5 mr-3" />
-                        <span>{item.title}</span>
-                      </Link>
-                    )}
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
-        </nav>
-      )}
-
-      {/* Footer - Fixed at bottom */}
-      <div className="flex-shrink-0 p-4 border-t border-gray-800">
-        <div className="text-center">
-          <p className="text-sm text-gray-400">Phiên bản 1.0.0</p>
-          <p className="text-xs text-gray-500 mt-1">© 2024 TVL Quản Lý Kho</p>
-          {loggedIn && (
-            <div className="flex flex-col items-center gap-2 mt-4">
-              <button
-                className="flex items-center gap-2 focus:outline-none"
-                onClick={() => setShowProfile(true)}
-                title="Thông tin cá nhân"
-              >
-                <span className="inline-block w-9 h-9 rounded-full bg-blue-600 text-white flex items-center justify-center text-lg font-bold">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 1115 0v.25a.75.75 0 01-.75.75h-13.5a.75.75 0 01-.75-.75v-.25z" />
-                  </svg>
-                </span>
-                <span className="flex items-left justify-left text-base font-semibold text-white-800">Admin</span> 
-              </button>
-            </div>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </div>
+            </nav>
           )}
-          <div className="mt-4">
-            {loggedIn ? (
-              <button
-                onClick={() => setShowLogoutConfirm(true)}
-                className="w-full bg-gray-700 text-white py-2 rounded hover:bg-gray-600 transition"
-              >
-                Đăng xuất
-              </button>
-            ) : (
-              <button
-                onClick={() => setShowLogin(true)}
-                className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
-              >
-                Đăng nhập
-              </button>
-            )}
+
+          {/* Footer - Fixed at bottom */}
+          <div className="flex-shrink-0 p-4 border-t border-gray-800">
+            <div className="text-center">
+              <p className="text-sm text-gray-400">Phiên bản 1.0.0</p>
+              <p className="text-xs text-gray-500 mt-1">© 2024 TVL Quản Lý Kho</p>
+              {loggedIn && (
+                <div className="flex flex-col items-center gap-2 mt-4">
+                  <button
+                    className="flex items-center gap-2 focus:outline-none"
+                    onClick={() => setShowProfile(true)}
+                    title="Thông tin cá nhân"
+                  >
+                    <span className="inline-block w-9 h-9 rounded-full bg-blue-600 text-white flex items-center justify-center text-lg font-bold">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 1115 0v.25a.75.75 0 01-.75.75h-13.5a.75.75 0 01-.75-.75v-.25z" />
+                      </svg>
+                    </span>
+                    <span className="flex items-left justify-left text-base font-semibold text-white-800">Admin</span>
+                  </button>
+                </div>
+              )}
+              <div className="mt-4">
+                {loggedIn ? (
+                  <button
+                    onClick={() => setShowLogoutConfirm(true)}
+                    className="w-full bg-gray-700 text-white py-2 rounded hover:bg-gray-600 transition"
+                  >
+                    Đăng xuất
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => setShowLogin(true)}
+                    className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+                  >
+                    Đăng nhập
+                  </button>
+                )}
+              </div>
+            </div>
+            <LoginModal open={showLogin} onLogin={handleLogin} onClose={() => setShowLogin(false)} />
+            <ConfirmLogoutModal open={showLogoutConfirm} onConfirm={handleLogout} onCancel={() => setShowLogoutConfirm(false)} />
+            <UserProfileModal open={showProfile} onClose={() => setShowProfile(false)} />
           </div>
         </div>
-        <LoginModal open={showLogin} onLogin={handleLogin} onClose={() => setShowLogin(false)} />
-        <ConfirmLogoutModal open={showLogoutConfirm} onConfirm={handleLogout} onCancel={() => setShowLogoutConfirm(false)} />
-        <UserProfileModal open={showProfile} onClose={() => setShowProfile(false)} />
       </div>
-    </div>
+    </>
   )
 } 
