@@ -15,7 +15,9 @@ import {
   BarChart3,
   ChevronDown,
   ChevronRight,
-  Menu
+  Menu,
+  Moon,
+  Sun
 } from 'lucide-react'
 import LoginModal from './LoginModal'
 import ConfirmLogoutModal from './ConfirmLogoutModal'
@@ -88,9 +90,17 @@ export default function Sidebar() {
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false)
   const [showProfile, setShowProfile] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [darkMode, setDarkMode] = useState(false)
 
   useEffect(() => {
     setLoggedIn(!!localStorage.getItem('tvl_logged_in'))
+    const dark = localStorage.getItem('tvl_dark_mode') === 'true'
+    setDarkMode(dark)
+    if (dark) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
   }, [])
 
   const handleLogin = () => {
@@ -120,6 +130,17 @@ export default function Sidebar() {
     return submenu.some(item => pathname === item.href)
   }
 
+  const toggleDarkMode = () => {
+    const newDark = !darkMode
+    setDarkMode(newDark)
+    localStorage.setItem('tvl_dark_mode', newDark.toString())
+    if (newDark) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  }
+
   return (
     <>
       {/* Nút menu cho mobile */}
@@ -143,7 +164,8 @@ export default function Sidebar() {
         )}
         <div
           className={`
-            fixed top-0 left-0 z-50 h-screen w-64 bg-gray-900 text-white flex flex-col
+            fixed top-0 left-0 z-50 h-screen w-64 bg-gray-200 text-black flex flex-col
+            dark:bg-gray-900 dark:text-white
             transition-transform duration-300
             md:static md:translate-x-0 md:flex
             ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}
@@ -238,8 +260,8 @@ export default function Sidebar() {
           {/* Footer - Fixed at bottom */}
           <div className="flex-shrink-0 p-4 border-t border-gray-800">
             <div className="text-center">
-              <p className="text-sm text-gray-400">Phiên bản 1.0.0</p>
-              <p className="text-xs text-gray-500 mt-1">© 2024 TVL Quản Lý Kho</p>
+              <p className="text-sm text-gray-400 dark:text-gray-400">Phiên bản 1.0.0</p>
+              <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">© 2024 TVL Quản Lý Kho</p>
               {loggedIn && (
                 <div className="flex flex-col items-center gap-2 mt-4">
                   <button
@@ -252,7 +274,7 @@ export default function Sidebar() {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 1115 0v.25a.75.75 0 01-.75.75h-13.5a.75.75 0 01-.75-.75v-.25z" />
                       </svg>
                     </span>
-                    <span className="flex items-left justify-left text-base font-semibold text-white-800">Admin</span>
+                    <span className="text-base font-semibold text-black text-left w-full pl-2 dark:text-white">Admin</span>
                   </button>
                 </div>
               )}
@@ -260,18 +282,28 @@ export default function Sidebar() {
                 {loggedIn ? (
                   <button
                     onClick={() => setShowLogoutConfirm(true)}
-                    className="w-full bg-gray-700 text-white py-2 rounded hover:bg-gray-600 transition"
+                    className="w-full bg-gray-700 text-white py-2 rounded hover:bg-gray-600 transition dark:bg-gray-800 dark:hover:bg-gray-700"
                   >
                     Đăng xuất
                   </button>
                 ) : (
                   <button
                     onClick={() => setShowLogin(true)}
-                    className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+                    className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition dark:bg-blue-900 dark:hover:bg-blue-800"
                   >
                     Đăng nhập
                   </button>
                 )}
+              </div>
+              <div className="mt-4 flex justify-center">
+                <button
+                  onClick={toggleDarkMode}
+                  className="flex items-center gap-2 px-3 py-2 rounded bg-gray-300 hover:bg-gray-400 text-gray-800 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-100 transition"
+                  title="Chuyển chế độ sáng/tối"
+                >
+                  {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                  <span>{darkMode ? 'Chế độ sáng' : 'Chế độ tối'}</span>
+                </button>
               </div>
             </div>
             <LoginModal open={showLogin} onLogin={handleLogin} onClose={() => setShowLogin(false)} />
