@@ -78,8 +78,8 @@ export default function ImportWarehousePage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Nhập kho</h1>
-          <p className="text-gray-600">Tự động nhập kho theo thông tin đăng ký xe</p>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Nhập kho</h1>
+          <p className="text-gray-600 dark:text-gray-300">Tự động nhập kho theo thông tin đăng ký xe</p>
         </div>
         <Link href="/quan-ly-kho" className="flex items-center px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors">
           <ArrowLeft className="h-4 w-4 mr-2" />
@@ -90,19 +90,19 @@ export default function ImportWarehousePage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Main Form */}
         <div className="lg:col-span-2">
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Thông tin nhập kho</h3>
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Thông tin nhập kho</h3>
             
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Vehicle Information */}
               <div>
-                <h4 className="text-md font-medium text-gray-800 mb-3 flex items-center">
+                <h4 className="text-md font-medium text-gray-800 dark:text-gray-200 mb-3 flex items-center">
                   <Truck className="h-5 w-5 mr-2" />
                   Thông tin xe
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Biển số xe *
                     </label>
                     <input
@@ -110,12 +110,12 @@ export default function ImportWarehousePage() {
                       name="licensePlate"
                       value={formData.licensePlate}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Tên tài xế *
                     </label>
                     <input
@@ -123,7 +123,7 @@ export default function ImportWarehousePage() {
                       name="driverName"
                       value={formData.driverName}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                       required
                     />
                   </div>
@@ -132,13 +132,13 @@ export default function ImportWarehousePage() {
 
               {/* Cargo Information */}
               <div>
-                <h4 className="text-md font-medium text-gray-800 mb-3 flex items-center">
+                <h4 className="text-md font-medium text-gray-800 dark:text-gray-200 mb-3 flex items-center">
                   <Package className="h-5 w-5 mr-2" />
                   Thong tin hang hoa
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Khach hang *
                     </label>
                     <input
@@ -146,12 +146,12 @@ export default function ImportWarehousePage() {
                       name="customerName"
                       value={formData.customerName}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Ten hang *
                     </label>
                     <input
@@ -159,19 +159,19 @@ export default function ImportWarehousePage() {
                       name="productName"
                       value={formData.productName}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Kho nhap *
                     </label>
                     <select
                       name="warehouse"
                       value={formData.warehouse}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                       required
                     >
                       <option value="">Chọn kho</option>
@@ -186,13 +186,13 @@ export default function ImportWarehousePage() {
 
               {/* Weight Information */}
               <div>
-                <h4 className="text-md font-medium text-gray-800 mb-3 flex items-center">
+                <h4 className="text-md font-medium text-gray-800 dark:text-gray-200 mb-3 flex items-center">
                   <Scale className="h-5 w-5 mr-2" />
                   Thông tin cân
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Cân xe vào (kg) *
                     </label>
                     <input
@@ -200,12 +200,12 @@ export default function ImportWarehousePage() {
                       name="weightIn"
                       value={formData.weightIn}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Cân xe ra (kg) *
                     </label>
                     <input
@@ -213,12 +213,12 @@ export default function ImportWarehousePage() {
                       name="weightOut"
                       value={formData.weightOut}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Trọng lượng hàng (kg)
                     </label>
                     <input
@@ -226,7 +226,7 @@ export default function ImportWarehousePage() {
                       name="netWeight"
                       value={formData.netWeight}
                       readOnly
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-600 text-gray-900 dark:text-white"
                     />
                   </div>
                 </div>
@@ -234,7 +234,7 @@ export default function ImportWarehousePage() {
 
               {/* Notes */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Ghi chú
                 </label>
                 <textarea
@@ -242,7 +242,7 @@ export default function ImportWarehousePage() {
                   value={formData.notes}
                   onChange={handleInputChange}
                   rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
                   placeholder="Ghi chú thêm về loại hàng..."
                 />
               </div>
@@ -271,28 +271,28 @@ export default function ImportWarehousePage() {
 
         {/* Scale Connection Panel */}
         <div className="lg:col-span-1">
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Kết nối cân</h3>
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Kết nối cân</h3>
             
             <div className="space-y-4">
               {/* Connection Status */}
               <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-gray-700">Trạng thái kết nối:</span>
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Trạng thái kết nối:</span>
                 <span className={`px-2 py-1 text-xs font-semibold rounded-full ${
-                  isConnected ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                  isConnected ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
                 }`}>
                   {isConnected ? 'Đã kết nối' : 'Chưa kết nối'}
                 </span>
               </div>
 
               {/* Current Weight Display */}
-              <div className="bg-gray-50 rounded-lg p-4 text-center">
-                <div className="text-2xl font-bold text-gray-900">
+              <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 text-center">
+                <div className="text-2xl font-bold text-gray-900 dark:text-white">
                   <ClientOnly fallback="0 kg">
                     {currentWeight.toLocaleString()} kg
                   </ClientOnly>
                 </div>
-                <div className="text-sm text-gray-600">Trọng lượng hiện tại</div>
+                <div className="text-sm text-gray-600 dark:text-gray-300">Trọng lượng hiện tại</div>
               </div>
 
               {/* Connection Controls */}
@@ -317,20 +317,20 @@ export default function ImportWarehousePage() {
               </div>
 
               {/* Scale Settings */}
-              <div className="border-t border-gray-200 pt-4">
-                <h4 className="text-sm font-medium text-gray-700 mb-2">Cài đặt cân</h4>
+              <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
+                <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Cài đặt cân</h4>
                 <div className="space-y-2">
                   <div>
-                    <label className="block text-xs text-gray-600">Cổng COM</label>
-                    <select className="w-full px-2 py-1 text-sm border border-gray-300 rounded">
+                    <label className="block text-xs text-gray-600 dark:text-gray-400">Cổng COM</label>
+                    <select className="w-full px-2 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
                       <option>COM1</option>
                       <option>COM2</option>
                       <option>COM3</option>
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs text-gray-600">Tốc độ baud</label>
-                    <select className="w-full px-2 py-1 text-sm border border-gray-300 rounded">
+                    <label className="block text-xs text-gray-600 dark:text-gray-400">Tốc độ baud</label>
+                    <select className="w-full px-2 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
                       <option>9600</option>
                       <option>19200</option>
                       <option>38400</option>
@@ -342,16 +342,16 @@ export default function ImportWarehousePage() {
           </div>
 
           {/* Quick Actions */}
-          <div className="bg-white rounded-lg shadow p-6 mt-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Thao tác nhanh</h3>
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mt-6">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Thao tác nhanh</h3>
             <div className="space-y-2">
-              <button className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
+              <button className="w-full text-left px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-colors">
                 Lấy thông tin từ đăng ký xe
               </button>
-              <button className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
+              <button className="w-full text-left px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-colors">
               Tự động điện tử cân
               </button>
-              <button className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
+              <button className="w-full text-left px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-colors">
                 Xem lịch sử nhập kho
               </button>
             </div>

@@ -90,69 +90,13 @@ export default function QuanLyKhachHang() {
   }
 
   return (
-    <div className="bg-gray-50 min-h-screen">
-      {/* Sidebar */}
-      <div className="flex flex-col fixed inset-y-0 left-0 w-64 bg-blue-800 text-white z-50">
-        <div className="flex items-center justify-center h-16 px-4 bg-blue-900">
-          <h1 className="text-lg font-bold">QUẢN LÝ KHO TVL</h1>
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Quản lý khách hàng</h1>
+          <p className="text-gray-600 dark:text-gray-300">Quản lý thông tin khách hàng trong hệ thống</p>
         </div>
-        <nav className="mt-4 overflow-y-auto">
-          <div className="px-4 py-2">
-            <h3 className="text-xs font-semibold text-blue-300 uppercase tracking-wider">Đăng ký xe</h3>
-            <div className="mt-2 space-y-1">
-              <a href="/dang-ky-xe" className="block px-4 py-2 text-sm hover:bg-blue-700 rounded">Nhập kho</a>
-              <a href="#" className="block px-4 py-2 text-sm hover:bg-blue-700 rounded">Xuất kho</a>
-            </div>
-          </div>
-          <div className="px-4 py-2">
-            <h3 className="text-xs font-semibold text-blue-300 uppercase tracking-wider">Quản lý kho</h3>
-            <div className="mt-2 space-y-1">
-              <a href="#" className="block px-4 py-2 text-sm hover:bg-blue-700 rounded">Chuyển trạng thái hàng</a>
-              <a href="#" className="block px-4 py-2 text-sm hover:bg-blue-700 rounded">Xuất kho</a>
-              <a href="#" className="block px-4 py-2 text-sm hover:bg-blue-700 rounded">Chuyển kho</a>
-            </div>
-          </div>
-          <div className="px-4 py-2">
-            <h3 className="text-xs font-semibold text-blue-300 uppercase tracking-wider">Danh mục</h3>
-            <div className="mt-2 space-y-1">
-              <a href="#" className="block px-4 py-2 text-sm hover:bg-blue-700 rounded">Kho</a>
-              <a href="#" className="block px-4 py-2 text-sm hover:bg-blue-700 rounded">Nhân viên</a>
-              <a href="#" className="block px-4 py-2 text-sm hover:bg-blue-700 rounded">Đơn vị tính</a>
-              <a href="#" className="block px-4 py-2 text-sm hover:bg-blue-700 rounded">Xe</a>
-              <a href="#" className="block px-4 py-2 text-sm hover:bg-blue-700 rounded">Hàng hóa</a>
-            </div>
-          </div>
-          <div className="px-4 py-2">
-            <a href="/quan-ly-khach-hang" className="block px-4 py-2 text-sm hover:bg-blue-700 rounded bg-blue-700">
-              <span>Quản lý khách hàng</span>
-            </a>
-            <a href="/hop-dong" className="block px-4 py-2 text-sm hover:bg-blue-700 rounded">Hợp đồng</a>
-            <a href="#" className="block px-4 py-2 text-sm hover:bg-blue-700 rounded">Thanh toán</a>
-            <a href="#" className="block px-4 py-2 text-sm hover:bg-blue-700 rounded">Danh mục cân</a>
-          </div>
-          <div className="px-4 py-2">
-            <h3 className="text-xs font-semibold text-blue-300 uppercase tracking-wider">Quản trị hệ thống</h3>
-            <div className="mt-2 space-y-1">
-              <a href="#" className="block px-4 py-2 text-sm hover:bg-blue-700 rounded">Quản lý người dùng</a>
-              <a href="#" className="block px-4 py-2 text-sm hover:bg-blue-700 rounded">Quản lý nhóm người dùng</a>
-              <a href="#" className="block px-4 py-2 text-sm hover:bg-blue-700 rounded">Quản lý phân quyền</a>
-            </div>
-          </div>
-          <div className="px-4 py-2">
-            <h3 className="text-xs font-semibold text-blue-300 uppercase tracking-wider">Báo cáo quản trị</h3>
-            <div className="mt-2 space-y-1">
-              <a href="#" className="block px-4 py-2 text-sm hover:bg-blue-700 rounded">Báo cáo tồn kho theo khách hàng</a>
-              <a href="#" className="block px-4 py-2 text-sm hover:bg-blue-700 rounded">Báo cáo tồn kho theo công nợ</a>
-              <a href="#" className="block px-4 py-2 text-sm hover:bg-blue-700 rounded">Dashboard</a>
-            </div>
-          </div>
-        </nav>
-      </div>
-
-      {/* Main Content */}
-      <div className="ml-64 p-8">
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">QUẢN LÝ KHÁCH HÀNG</h2>
-        <p className="text-gray-600 mb-6">Quản lý thông tin khách hàng trong hệ thống</p>
 
         <div className="flex justify-between items-center mb-6">
           <div className="relative">
@@ -161,9 +105,9 @@ export default function QuanLyKhachHang() {
               placeholder="Tìm kiếm khách hàng..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
             />
-            <i className="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+            <i className="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500"></i>
           </div>
 
           <button
@@ -174,55 +118,55 @@ export default function QuanLyKhachHang() {
           </button>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
           <div className="p-6">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Danh sách khách hàng</h3>
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Danh sách khách hàng</h3>
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                <thead className="bg-gray-50 dark:bg-gray-700">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      STT <i className="fa fa-sort text-gray-500"></i>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                      STT <i className="fa fa-sort text-gray-500 dark:text-gray-400"></i>
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Mã khách hàng <i className="fa fa-sort text-gray-500"></i>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                      Mã khách hàng <i className="fa fa-sort text-gray-500 dark:text-gray-400"></i>
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Họ và tên <i className="fa fa-sort text-gray-500"></i>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                      Họ và tên <i className="fa fa-sort text-gray-500 dark:text-gray-400"></i>
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Số điện thoại <i className="fa fa-sort text-gray-500"></i>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                      Số điện thoại <i className="fa fa-sort text-gray-500 dark:text-gray-400"></i>
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Email <i className="fa fa-sort text-gray-500"></i>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                      Email <i className="fa fa-sort text-gray-500 dark:text-gray-400"></i>
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Loại khách hàng <i className="fa fa-sort text-gray-500"></i>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                      Loại khách hàng <i className="fa fa-sort text-gray-500 dark:text-gray-400"></i>
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                       Trạng thái
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                       Thao tác
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                   {currentCustomers.map((customer, index) => (
-                    <tr key={customer.id} className="hover:bg-gray-50">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <tr key={customer.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
                         {startIndex + index + 1}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
                         {customer.id}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
                         {customer.name}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-blue-500">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-blue-500 dark:text-blue-400">
                         {customer.phone}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-blue-500">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-blue-500 dark:text-blue-400">
                         {customer.email}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
@@ -242,14 +186,14 @@ export default function QuanLyKhachHang() {
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <button
                           onClick={() => editCustomer(customer.id)}
-                          className="text-blue-500 hover:text-blue-600 mr-3"
+                          className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 mr-3"
                           title="Sửa"
                         >
                           <i className="fas fa-edit"></i>
                         </button>
                         <button
                           onClick={() => deleteCustomer(customer.id)}
-                          className="text-red-500 hover:text-red-600"
+                          className="text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300"
                           title="Xoá"
                         >
                           <i className="fas fa-trash-alt"></i>
@@ -268,7 +212,7 @@ export default function QuanLyKhachHang() {
                   <button
                     onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                     disabled={currentPage === 1}
-                    className="px-3 py-1 border rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed text-gray-900 dark:text-white"
                   >
                     ‹
                   </button>
@@ -276,7 +220,7 @@ export default function QuanLyKhachHang() {
                     <button
                       key={page}
                       onClick={() => setCurrentPage(page)}
-                      className={`px-3 py-1 border rounded hover:bg-gray-100 ${
+                      className={`px-3 py-1 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white ${
                         page === currentPage ? 'bg-blue-500 text-white' : ''
                       }`}
                     >
@@ -286,7 +230,7 @@ export default function QuanLyKhachHang() {
                   <button
                     onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
                     disabled={currentPage === totalPages}
-                    className="px-3 py-1 border rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed text-gray-900 dark:text-white"
                   >
                     ›
                   </button>
@@ -304,15 +248,15 @@ export default function QuanLyKhachHang() {
                 <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
               </div>
               <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-              <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                  <h3 className="text-lg font-medium text-gray-900 mb-4">
+              <div className="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <div className="bg-white dark:bg-gray-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
                     {editingCustomer ? 'Sửa khách hàng' : 'Thêm khách hàng'}
                   </h3>
                   <form onSubmit={saveCustomer} className="space-y-4">
                     <input type="hidden" name="id" value={editingCustomer?.id || ''} />
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                         Tên khách hàng
                       </label>
                       <input
@@ -320,11 +264,11 @@ export default function QuanLyKhachHang() {
                         name="name"
                         defaultValue={editingCustomer?.name || ''}
                         required
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                         Số điện thoại
                       </label>
                       <input
@@ -332,11 +276,11 @@ export default function QuanLyKhachHang() {
                         name="phone"
                         defaultValue={editingCustomer?.phone || ''}
                         required
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                         Email
                       </label>
                       <input
@@ -344,17 +288,17 @@ export default function QuanLyKhachHang() {
                         name="email"
                         defaultValue={editingCustomer?.email || ''}
                         required
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                         Loại khách hàng
                       </label>
                       <select
                         name="type"
                         defaultValue={editingCustomer?.type || 'Cá nhân'}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                       >
                         <option value="Cá nhân">Cá nhân</option>
                         <option value="Doanh nghiệp">Doanh nghiệp</option>
@@ -364,7 +308,7 @@ export default function QuanLyKhachHang() {
                       <button
                         type="button"
                         onClick={closeForm}
-                        className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                        className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                       >
                         Hủy
                       </button>

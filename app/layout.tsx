@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import Sidebar from '@/components/Sidebar'
+import AuthWrapper from '@/components/AuthWrapper'
+import { ModalProvider } from '@/components/ModalContext'
 import { Toaster } from 'react-hot-toast'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -18,25 +19,23 @@ export default function RootLayout({
 }) {
   return (
     <html lang="vi">
-      <body className={`${inter.className} bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100`}>
-        <div className="flex h-screen bg-gray-100 dark:bg-gray-900">
-          <Sidebar />
-          <main className="flex-1 overflow-auto">
-            <div className="p-6">
-              {children}
-            </div>
-          </main>
-        </div>
-        <Toaster 
-          position="top-right"
-          toastOptions={{
-            duration: 3000,
-            style: {
-              background: '#363636',
-              color: '#fff',
-            },
-          }}
-        />
+      <body className={`${inter.className} bg-gray-100 text-gray-900 dark:bg-gray-950 dark:text-gray-100`}>
+        <ModalProvider>
+          <AuthWrapper>
+            {children}
+          </AuthWrapper>
+          <Toaster 
+            position="top-right"
+            toastOptions={{
+              duration: 3000,
+              style: {
+                background: '#f3f4f6',
+                color: '#111827',
+              },
+              className: 'dark:!bg-gray-800 dark:!text-gray-100',
+            }}
+          />
+        </ModalProvider>
       </body>
     </html>
   )

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { 
   Home, 
   Truck, 
@@ -19,9 +19,7 @@ import {
   Moon,
   Sun
 } from 'lucide-react'
-import LoginModal from './LoginModal'
-import ConfirmLogoutModal from './ConfirmLogoutModal'
-import UserProfileModal from './UserProfileModal'
+import { useModal } from './ModalContext'
 
 const menuItems = [
   {
@@ -85,12 +83,11 @@ const menuItems = [
 export default function Sidebar() {
   const [expandedItems, setExpandedItems] = useState<string[]>([])
   const pathname = usePathname()
-  const [showLogin, setShowLogin] = useState(false)
+  const router = useRouter()
   const [loggedIn, setLoggedIn] = useState(false)
-  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false)
-  const [showProfile, setShowProfile] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [darkMode, setDarkMode] = useState(false)
+  const { setShowLogin, setShowLogoutConfirm, setShowProfile } = useModal()
 
   useEffect(() => {
     setLoggedIn(!!localStorage.getItem('tvl_logged_in'))
@@ -103,16 +100,7 @@ export default function Sidebar() {
     }
   }, [])
 
-  const handleLogin = () => {
-    setShowLogin(false)
-    setLoggedIn(true)
-  }
 
-  const handleLogout = () => {
-    localStorage.removeItem('tvl_logged_in')
-    setLoggedIn(false)
-    setShowLogoutConfirm(false)
-  }
 
   const toggleExpanded = (title: string) => {
     setExpandedItems(prev => 
@@ -145,7 +133,7 @@ export default function Sidebar() {
     <>
       {/* Nút menu cho mobile */}
       <button
-        className="fixed top-4 left-4 z-50 md:hidden bg-gray-900 text-white p-2 rounded shadow focus:outline-none"
+        className="fixed top-4 left-4 z-50 md:hidden bg-gray-200 text-gray-900 dark:bg-gray-900 dark:text-white p-2 rounded shadow focus:outline-none"
         onClick={() => setMobileOpen(true)}
         aria-label="Mở menu"
       >
@@ -164,7 +152,7 @@ export default function Sidebar() {
         )}
         <div
           className={`
-            fixed top-0 left-0 z-50 h-screen w-64 bg-gray-200 text-black flex flex-col
+            fixed top-0 left-0 z-50 h-screen w-64 bg-gray-200 text-gray-900 flex flex-col
             dark:bg-gray-900 dark:text-white
             transition-transform duration-300
             md:static md:translate-x-0 md:flex
@@ -174,9 +162,9 @@ export default function Sidebar() {
           style={{ maxWidth: '100vw' }}
         >
           {/* Logo - Fixed at top */}
-          <div className="flex-shrink-0 p-6 border-b border-gray-800">
-            <h1 className="text-xl font-bold">TVL Quản Lý Kho</h1>
-            <p className="text-sm text-gray-400">Phần mềm quản lý kho hiện đại</p>
+          <div className="flex-shrink-0 p-6 border-b border-gray-300 dark:border-gray-800">
+            <h1 className="text-xl font-bold text-gray-900 dark:text-white">SmartWarehouse</h1>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Phần mềm quản lý kho hiện đại</p>
           </div>
 
           {/* Navigation - Scrollable */}
@@ -202,7 +190,7 @@ export default function Sidebar() {
                               className={`w-full flex items-center justify-between px-3 py-2 rounded-lg transition-colors ${
                                 isSubActive 
                                   ? 'bg-blue-600 text-white' 
-                                  : 'text-gray-300 hover:bg-gray-800 hover:text-white'
+                                  : 'text-gray-700 hover:bg-gray-300 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white'
                               }`}
                             >
                               <div className="flex items-center">
@@ -224,7 +212,7 @@ export default function Sidebar() {
                                       className={`block px-3 py-2 rounded-lg transition-colors ${
                                         isActive(subItem.href)
                                           ? 'bg-blue-600 text-white'
-                                          : 'text-gray-400 hover:bg-gray-800 hover:text-white'
+                                          : 'text-gray-600 hover:bg-gray-300 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white'
                                       }`}
                                       onClick={() => setMobileOpen(false)}
                                     >
@@ -241,7 +229,7 @@ export default function Sidebar() {
                             className={`flex items-center px-3 py-2 rounded-lg transition-colors ${
                               isActive(item.href || '')
                                 ? 'bg-blue-600 text-white'
-                                : 'text-gray-300 hover:bg-gray-800 hover:text-white'
+                                : 'text-gray-700 hover:bg-gray-300 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white'
                             }`}
                             onClick={() => setMobileOpen(false)}
                           >
@@ -257,59 +245,109 @@ export default function Sidebar() {
             </nav>
           )}
 
+          {/* Nếu chưa đăng nhập, chỉ hiển thị nút đăng nhập */}
+          {!loggedIn && (
+            <div className="flex-1 flex flex-col items-center justify-center p-6">
+              <button
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                onClick={() => setShowLogin(true)}
+              >
+                Đăng nhập
+              </button>
+            </div>
+          )}
+
           {/* Footer - Fixed at bottom */}
-          <div className="flex-shrink-0 p-4 border-t border-gray-800">
-            <div className="text-center">
-              <p className="text-sm text-gray-400 dark:text-gray-400">Phiên bản 1.0.0</p>
-              <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">© 2024 TVL Quản Lý Kho</p>
-              {loggedIn && (
-                <div className="flex flex-col items-center gap-2 mt-4">
-                  <button
-                    className="flex items-center gap-2 focus:outline-none"
-                    onClick={() => setShowProfile(true)}
-                    title="Thông tin cá nhân"
-                  >
-                    <span className="inline-block w-9 h-9 rounded-full bg-blue-600 text-white flex items-center justify-center text-lg font-bold">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7">
+          <div className="flex-shrink-0 border-t border-gray-300 dark:border-gray-800">
+            {/* User Profile Section */}
+            {loggedIn && (
+              <div className="p-4 border-b border-gray-200 dark:border-gray-700">
+                <button
+                  className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group"
+                  onClick={() => setShowProfile(true)}
+                  title="Thông tin cá nhân"
+                >
+                  <div className="relative">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-semibold shadow-lg">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 1115 0v.25a.75.75 0 01-.75.75h-13.5a.75.75 0 01-.75-.75v-.25z" />
                       </svg>
-                    </span>
-                    <span className="text-base font-semibold text-black text-left w-full pl-2 dark:text-white">Admin</span>
-                  </button>
-                </div>
-              )}
-              <div className="mt-4">
-                {loggedIn ? (
-                  <button
-                    onClick={() => setShowLogoutConfirm(true)}
-                    className="w-full bg-gray-700 text-white py-2 rounded hover:bg-gray-600 transition dark:bg-gray-800 dark:hover:bg-gray-700"
-                  >
-                    Đăng xuất
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => setShowLogin(true)}
-                    className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition dark:bg-blue-900 dark:hover:bg-blue-800"
-                  >
-                    Đăng nhập
-                  </button>
-                )}
-              </div>
-              <div className="mt-4 flex justify-center">
-                <button
-                  onClick={toggleDarkMode}
-                  className="flex items-center gap-2 px-3 py-2 rounded bg-gray-300 hover:bg-gray-400 text-gray-800 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-100 transition"
-                  title="Chuyển chế độ sáng/tối"
-                >
-                  {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-                  <span>{darkMode ? 'Chế độ sáng' : 'Chế độ tối'}</span>
+                    </div>
+                    <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full"></div>
+                  </div>
+                  <div className="flex-1 text-left">
+                    <p className="font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                      Admin User
+                    </p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      Quản trị viên
+                    </p>
+                  </div>
+                  <svg className="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
                 </button>
               </div>
+            )}
+
+            {/* Action Buttons */}
+            <div className="p-4 space-y-2">
+              {/* Dark Mode Toggle */}
+              <button
+                onClick={toggleDarkMode}
+                className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-300 transition-all duration-200 group"
+                title="Chuyển chế độ sáng/tối"
+              >
+                <div className="flex items-center justify-center w-5 h-5">
+                  {darkMode ? (
+                    <Sun className="w-4 h-4 text-yellow-500 group-hover:scale-110 transition-transform" />
+                  ) : (
+                    <Moon className="w-4 h-4 text-blue-500 group-hover:scale-110 transition-transform" />
+                  )}
+                </div>
+                <span className="text-sm font-medium">
+                  {darkMode ? 'Chế độ sáng' : 'Chế độ tối'}
+                </span>
+              </button>
+
+              {/* Login/Logout Button */}
+              {loggedIn ? (
+                <button
+                  onClick={() => setShowLogoutConfirm(true)}
+                  className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-red-50 hover:bg-red-100 text-red-700 dark:bg-red-900/20 dark:hover:bg-red-900/30 dark:text-red-400 transition-all duration-200 group"
+                >
+                  <svg className="w-4 h-4 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                  </svg>
+                  <span className="text-sm font-medium">Đăng xuất</span>
+                </button>
+              ) : (
+                <button
+                  onClick={() => setShowLogin(true)}
+                  className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 dark:bg-blue-900/20 dark:hover:bg-blue-900/30 dark:text-blue-400 transition-all duration-200 group"
+                >
+                  <svg className="w-4 h-4 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                  </svg>
+                  <span className="text-sm font-medium">Đăng nhập</span>
+                </button>
+              )}
             </div>
-            <LoginModal open={showLogin} onLogin={handleLogin} onClose={() => setShowLogin(false)} />
-            <ConfirmLogoutModal open={showLogoutConfirm} onConfirm={handleLogout} onCancel={() => setShowLogoutConfirm(false)} />
-            <UserProfileModal open={showProfile} onClose={() => setShowProfile(false)} />
+
+            {/* Version Info */}
+            <div className="px-4 pb-4">
+              <div className="text-center p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50">
+                <div className="flex items-center justify-center gap-2 mb-1">
+                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                  <span className="text-xs font-medium text-gray-600 dark:text-gray-400">Trực tuyến</span>
+                </div>
+                <p className="text-xs text-gray-500 dark:text-gray-500">Phiên bản 1.0.0</p>
+                <p className="text-xs text-gray-400 dark:text-gray-600 mt-1">© 2024 TVL Quản Lý Kho</p>
+              </div>
+            </div>
           </div>
+
+
         </div>
       </div>
     </>

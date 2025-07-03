@@ -125,10 +125,10 @@ export default function Dashboard() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
-          <p className="text-gray-600">Tổng quan hệ thống quản lý kho</p>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Dashboard</h1>
+          <p className="text-gray-600 dark:text-gray-300">Tổng quan hệ thống quản lý kho</p>
         </div>
-        <div className="text-sm text-gray-500">
+        <div className="text-sm text-gray-500 dark:text-gray-400">
           <ClientOnly fallback="Cập nhật lần cuối: ...">
             <TimeDisplay />
           </ClientOnly>
@@ -138,14 +138,14 @@ export default function Dashboard() {
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {stats.map((stat) => (
-          <div key={stat.name} className="bg-white rounded-lg shadow p-6">
+          <div key={stat.name} className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
             <div className="flex items-center">
               <div className={`p-2 rounded-lg ${stat.color}`}>
                 <stat.icon className="h-6 w-6 text-white" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">{stat.name}</p>
-                <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-300">{stat.name}</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">{stat.value}</p>
               </div>
             </div>
             <div className="mt-4 flex items-center">
@@ -154,7 +154,7 @@ export default function Dashboard() {
               }`}>
                 {stat.change}
               </span>
-              <span className="text-sm text-gray-500 ml-2">so với tháng trước</span>
+              <span className="text-sm text-gray-500 dark:text-gray-400 ml-2">so với tháng trước</span>
             </div>
           </div>
         ))}
@@ -163,28 +163,28 @@ export default function Dashboard() {
       {/* Charts Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Warehouse Capacity */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Dung lượng kho</h3>
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Dung lượng kho</h3>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={warehouseData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
+              <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+              <XAxis dataKey="name" stroke="#9CA3AF" />
+              <YAxis stroke="#9CA3AF" />
+              <Tooltip contentStyle={{ backgroundColor: '#1F2937', border: 'none', borderRadius: '8px', color: '#F9FAFB' }} />
               <Bar dataKey="used" fill="#3B82F6" name="Đã sử dụng" />
             </BarChart>
           </ResponsiveContainer>
         </div>
 
         {/* Revenue Chart */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Doanh thu & Chi phí</h3>
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Doanh thu & Chi phí</h3>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={revenueData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="month" />
-              <YAxis />
-              <Tooltip />
+              <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+              <XAxis dataKey="month" stroke="#9CA3AF" />
+              <YAxis stroke="#9CA3AF" />
+              <Tooltip contentStyle={{ backgroundColor: '#1F2937', border: 'none', borderRadius: '8px', color: '#F9FAFB' }} />
               <Line type="monotone" dataKey="revenue" stroke="#10B981" name="Doanh thu" />
               <Line type="monotone" dataKey="cost" stroke="#EF4444" name="Chi phí" />
             </LineChart>
@@ -195,8 +195,8 @@ export default function Dashboard() {
       {/* Product Types & Recent Activities */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Product Types */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Loại hàng hóa</h3>
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Loại hàng hóa</h3>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Pie
@@ -211,14 +211,14 @@ export default function Dashboard() {
                   <Cell key={`cell-${index}`} fill={entry.color} />
                 ))}
               </Pie>
-              <Tooltip />
+              <Tooltip contentStyle={{ backgroundColor: '#1F2937', border: 'none', borderRadius: '8px', color: '#F9FAFB' }} />
             </PieChart>
           </ResponsiveContainer>
         </div>
 
         {/* Recent Activities */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Hoạt động gần đây</h3>
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Hoạt động gần đây</h3>
           <div className="space-y-4">
             {recentActivities.map((activity) => (
               <div key={activity.id} className="flex items-start space-x-3">
@@ -230,9 +230,9 @@ export default function Dashboard() {
                   )}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900">{activity.type}</p>
-                  <p className="text-sm text-gray-500">{activity.description}</p>
-                  <p className="text-xs text-gray-400">{activity.time}</p>
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">{activity.type}</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-300">{activity.description}</p>
+                  <p className="text-xs text-gray-400 dark:text-gray-400">{activity.time}</p>
                 </div>
               </div>
             ))}
@@ -241,24 +241,24 @@ export default function Dashboard() {
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-white rounded-lg shadow p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Thao tác nhanh</h3>
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Thao tác nhanh</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <button className="flex flex-col items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+          <button className="flex flex-col items-center p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
             <Truck className="h-8 w-8 text-blue-600 mb-2" />
-            <span className="text-sm font-medium text-gray-900">Đăng ký xe</span>
+            <span className="text-sm font-medium text-gray-900 dark:text-white">Đăng ký xe</span>
           </button>
-          <button className="flex flex-col items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+          <button className="flex flex-col items-center p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
             <Package className="h-8 w-8 text-green-600 mb-2" />
-            <span className="text-sm font-medium text-gray-900">Nhập kho</span>
+            <span className="text-sm font-medium text-gray-900 dark:text-white">Nhập kho</span>
           </button>
-          <button className="flex flex-col items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+          <button className="flex flex-col items-center p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
             <Warehouse className="h-8 w-8 text-purple-600 mb-2" />
-            <span className="text-sm font-medium text-gray-900">Xuất kho</span>
+            <span className="text-sm font-medium text-gray-900 dark:text-white">Xuất kho</span>
           </button>
-          <button className="flex flex-col items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+          <button className="flex flex-col items-center p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
             <Users className="h-8 w-8 text-yellow-600 mb-2" />
-            <span className="text-sm font-medium text-gray-900">Khách hàng</span>
+            <span className="text-sm font-medium text-gray-900 dark:text-white">Khách hàng</span>
           </button>
         </div>
       </div>
