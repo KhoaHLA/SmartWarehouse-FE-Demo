@@ -91,17 +91,17 @@ export default function WarehouseManagementPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Quản lý kho</h1>
           <p className="text-gray-600 dark:text-gray-300">Quản lý nhập xuất kho và tồn kho</p>
         </div>
-        <div className="flex space-x-3">
-          <Link href="/quan-ly-kho/nhap-kho" className="flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+        <div className="flex flex-col gap-2 sm:flex-row sm:gap-3 w-full sm:w-auto">
+          <Link href="/quan-ly-kho/nhap-kho" className="flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors w-full sm:w-auto justify-center">
             <ArrowRight className="h-4 w-4 mr-2" />
             Nhập kho
           </Link>
-          <Link href="/quan-ly-kho/xuat-kho" className="flex items-center px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
+          <Link href="/quan-ly-kho/xuat-kho" className="flex items-center px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors w-full sm:w-auto justify-center">
             <ArrowLeft className="h-4 w-4 mr-2" />
             Xuất kho
           </Link>
@@ -197,15 +197,15 @@ export default function WarehouseManagementPage() {
 
       {/* Inventory Management */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Quản lý tồn kho</h3>
-          <div className="flex space-x-3">
+        <div className="mb-4">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Quản lý tồn kho</h3>
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
             <select
               value={selectedWarehouse}
               onChange={(e) => setSelectedWarehouse(e.target.value)}
-              className="border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              className="border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white w-full sm:w-auto"
             >
-              <option value="all">Tất cả kho</option>
+              <option value="flex all">Tất cả kho</option>
               {mockWarehouseData.map((warehouse) => (
                 <option key={warehouse.id} value={warehouse.warehouseName}>
                   {warehouse.warehouseName}
@@ -217,13 +217,13 @@ export default function WarehouseManagementPage() {
               placeholder="Tìm kiếm hàng hóa, khách hàng..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+              className="border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 w-full sm:w-auto"
             />
           </div>
         </div>
 
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+          <table className="min-w-full break-words divide-y divide-gray-200 dark:divide-gray-700">
             <thead className="bg-gray-50 dark:bg-gray-700">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
@@ -281,7 +281,7 @@ export default function WarehouseManagementPage() {
       </div>
 
       {/* Quick Actions */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-4 md:gap-6 md:p-6">
         <Link href="/quan-ly-kho/nhap-kho" className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 hover:shadow-lg transition-shadow">
           <div className="flex items-center">
             <div className="p-2 bg-green-100 dark:bg-green-900 rounded-lg">

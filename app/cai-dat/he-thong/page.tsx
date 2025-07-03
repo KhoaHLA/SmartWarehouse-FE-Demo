@@ -117,8 +117,8 @@ export default function CaiDatHeThongPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-2 sm:flex-row sm:gap-3 w-full sm:w-auto">
           <Link href="/cai-dat" className="flex items-center px-3 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Quay lại

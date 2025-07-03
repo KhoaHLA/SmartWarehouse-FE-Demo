@@ -95,12 +95,12 @@ export default function HopDongPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Quản lý hợp đồng</h1>
           <p className="text-gray-600 dark:text-gray-300">Quản lý và theo dõi hợp đồng với khách hàng</p>
         </div>
-        <div className="flex space-x-3">
+        <div className="flex flex-col gap-2 sm:flex-row sm:gap-3 w-full sm:w-auto">
           <button className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
             <Download className="h-4 w-4 mr-2" />
             Xuất báo cáo
@@ -278,7 +278,7 @@ export default function HopDongPage() {
 
       {/* Pagination */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow px-6 py-4">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col items-center gap-2">
           <div className="text-sm text-gray-700 dark:text-gray-300">
             Hiển thị <span className="font-medium">1</span> đến <span className="font-medium">3</span> trong tổng số <span className="font-medium">24</span> kết quả
           </div>

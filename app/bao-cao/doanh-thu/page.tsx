@@ -71,25 +71,19 @@ export default function BaoCaoDoanhThuPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <Link href="/bao-cao" className="flex items-center px-3 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Quay lại
-          </Link>
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Báo cáo doanh thu</h1>
-            <p className="text-gray-600 dark:text-gray-400">Phân tích doanh thu và hiệu suất kinh doanh</p>
-          </div>
+      <div className="mb-6">
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">Báo cáo doanh thu</h1>
+        <p className="text-gray-600 dark:text-gray-300 mb-3">Theo dõi doanh thu theo thời gian</p>
+        <div className="flex flex-col gap-2 sm:flex-row sm:gap-3 w-full sm:w-auto">
+          <button className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors w-full sm:w-auto justify-center">
+            <Download className="h-4 w-4 mr-2" />
+            Xuất Excel
+          </button>
         </div>
-        <button className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-          <Download className="w-4 h-4 mr-2" />
-          Xuất báo cáo
-        </button>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-4 md:gap-6 md:p-6">
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 border border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between">
             <div>
@@ -238,7 +232,7 @@ export default function BaoCaoDoanhThuPage() {
       </div>
 
       {/* Top Products and Customers */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-4 md:gap-6 md:p-6">
         {/* Top Products */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700">
           <div className="p-6 border-b border-gray-200 dark:border-gray-700">

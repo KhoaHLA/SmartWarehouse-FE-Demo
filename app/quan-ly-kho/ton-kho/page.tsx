@@ -95,12 +95,12 @@ export default function StockPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Tồn kho</h1>
           <p className="text-gray-600 dark:text-gray-300">Quản lý và theo dõi tồn kho hàng hóa</p>
         </div>
-        <div className="flex space-x-3">
+        <div className="flex flex-col gap-2 sm:flex-row sm:gap-3 w-full sm:w-auto">
           <button className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
             <Download className="h-4 w-4 mr-2" />
             Xuất báo cáo
@@ -112,7 +112,7 @@ export default function StockPage() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-4 md:gap-6 md:p-6">
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
           <div className="flex items-center">
             <div className="p-2 rounded-lg bg-blue-500">
@@ -160,8 +160,8 @@ export default function StockPage() {
       </div>
 
       {/* Filters and Search */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-        <div className="flex flex-col md:flex-row gap-4">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 md:p-6">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
           <div className="flex-1">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 h-4 w-4" />
@@ -174,11 +174,11 @@ export default function StockPage() {
               />
             </div>
           </div>
-          <div className="flex gap-4">
+          <div className="flex flex-col gap-3 sm:flex-row sm:gap-4 w-full sm:w-auto">
             <select
               value={selectedWarehouse}
               onChange={(e) => setSelectedWarehouse(e.target.value)}
-              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white w-full sm:w-auto"
             >
               <option value="all">Tất cả kho</option>
               <option value="Kho A1">Kho A1</option>
@@ -189,7 +189,7 @@ export default function StockPage() {
             <select
               value={selectedStatus}
               onChange={(e) => setSelectedStatus(e.target.value)}
-              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white w-full sm:w-auto"
             >
               <option value="all">Tất cả trạng thái</option>
               <option value="available">Có sẵn</option>
@@ -200,13 +200,34 @@ export default function StockPage() {
         </div>
       </div>
 
+      {/* Pagination on desktop (above table) */}
+      {/* PHÂN TRANG Ở DƯỚI TABLE, DÒNG HIỂN THỊ ĐỂ Ở DƯỚI CÙNG */}
+      <div className="hidden md:block bg-white dark:bg-gray-800 rounded-lg shadow px-6 py-4 mb-4">
+        <div className="flex flex-col items-center gap-2">
+          <div className="flex space-x-2">
+            <button className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-md text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
+              Trước
+            </button>
+            <button className="px-3 py-1 bg-blue-600 text-white rounded-md text-sm">1</button>
+            <button className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-md text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">2</button>
+            <button className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-md text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">3</button>
+            <button className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-md text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
+              Sau
+            </button>
+          </div>
+          <div className="text-sm text-gray-700 dark:text-gray-300 mt-2 text-center">
+            Hiển thị <span className="text-blue-600 font-medium">1</span> đến <span className="px-1 text-blue-600 font-medium">5</span> trong tổng số <span className="px-1 text-blue-600 font-medium">24</span> kết quả
+          </div>
+        </div>
+      </div>
+
       {/* Stock Table */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
-        <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <div className="px-4 md:px-6 py-4 border-b border-gray-200 dark:border-gray-700">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Danh sách tồn kho</h3>
         </div>
-        <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+        <div className="overflow-x-auto w-full">
+          <table className="min-w-full break-words divide-y divide-gray-200 dark:divide-gray-700">
             <thead className="bg-gray-50 dark:bg-gray-700">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
@@ -266,12 +287,9 @@ export default function StockPage() {
         </div>
       </div>
 
-      {/* Pagination */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow px-6 py-4">
-        <div className="flex items-center justify-between">
-          <div className="text-sm text-gray-700 dark:text-gray-300">
-            Hiển thị <span className="font-medium">1</span> đến <span className="font-medium">5</span> trong tổng số <span className="font-medium">24</span> kết quả
-          </div>
+      {/* Pagination on mobile (below table) */}
+      <div className="block md:hidden bg-white dark:bg-gray-800 rounded-lg shadow px-6 py-4">
+        <div className="flex flex-col items-center gap-2">
           <div className="flex space-x-2">
             <button className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-md text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
               Trước
@@ -282,6 +300,9 @@ export default function StockPage() {
             <button className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-md text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
               Sau
             </button>
+          </div>
+          <div className="text-sm text-gray-700 dark:text-gray-300 mt-2 text-center">
+            Hiển thị <span className="font-medium">1</span> đến <span className="font-medium">5</span> trong tổng số <span className="font-medium">24</span> kết quả
           </div>
         </div>
       </div>

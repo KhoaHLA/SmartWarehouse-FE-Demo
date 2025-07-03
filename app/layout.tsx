@@ -22,7 +22,9 @@ export default function RootLayout({
       <body className={`${inter.className} bg-gray-100 text-gray-900 dark:bg-gray-950 dark:text-gray-100`}>
         <ModalProvider>
           <AuthWrapper>
-            {children}
+            <div className="pt-16 md:pt-0">
+              {children}
+            </div>
           </AuthWrapper>
           <Toaster 
             position="top-right"

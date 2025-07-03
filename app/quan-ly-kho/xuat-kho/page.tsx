@@ -76,7 +76,7 @@ export default function ExportWarehousePage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Xuất kho</h1>
           <p className="text-gray-600 dark:text-gray-300">Quản lý xuất kho hàng hóa</p>
@@ -248,20 +248,19 @@ export default function ExportWarehousePage() {
               </div>
 
               {/* Form Actions */}
-              <div className="flex justify-end space-x-3 pt-4">
+              <div className="flex justify-center space-x-3 pt-4">
                 <button
                   type="button"
                   onClick={handlePrint}
-                  className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  className="flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
                 >
-                  <Printer className="h-4 w-4 mr-2" />
+
                   In phiếu cân
                 </button>
                 <button
                   type="submit"
-                  className="flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                  className="flex items-center justify-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
                 >
-                  <Save className="h-4 w-4 mr-2" />
                   Lưu thông tin
                 </button>
               </div>

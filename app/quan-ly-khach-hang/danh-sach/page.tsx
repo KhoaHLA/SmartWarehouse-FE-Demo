@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Search, Filter, Download, Eye, Edit, Trash2, User, Building, Phone } from 'lucide-react'
+import { Search, Filter, Download, Eye, Edit, Trash2, User, Building, Phone, Plus } from 'lucide-react'
 import Link from 'next/link'
 
 const customerData = [
@@ -106,18 +106,18 @@ export default function CustomerListPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Danh sách khách hàng</h1>
           <p className="text-gray-600 dark:text-gray-300">Quản lý thông tin khách hàng</p>
         </div>
-        <div className="flex space-x-3">
+        <div className="flex flex-col gap-2 sm:flex-row sm:gap-3 w-full sm:w-auto">
           <button className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
             <Download className="h-4 w-4 mr-2" />
             Xuất báo cáo
           </button>
           <Link href="/quan-ly-khach-hang/them-khach-hang" className="flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
-            <User className="h-4 w-4 mr-2" />
+            <Plus className="h-4 w-4 mr-2" />
             Thêm khách hàng
           </Link>
         </div>
@@ -216,7 +216,7 @@ export default function CustomerListPage() {
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Danh sách khách hàng</h3>
         </div>
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+          <table className="min-w-full break-words divide-y divide-gray-200 dark:divide-gray-700">
             <thead className="bg-gray-50 dark:bg-gray-700">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
@@ -286,10 +286,7 @@ export default function CustomerListPage() {
 
       {/* Pagination */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow px-6 py-4">
-        <div className="flex items-center justify-between">
-          <div className="text-sm text-gray-700 dark:text-gray-300">
-            Hiển thị <span className="font-medium">1</span> đến <span className="font-medium">5</span> trong tổng số <span className="font-medium">156</span> kết quả
-          </div>
+        <div className="flex flex-col items-center gap-2">
           <div className="flex space-x-2">
             <button className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-md text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
               Trước
@@ -300,6 +297,9 @@ export default function CustomerListPage() {
             <button className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-md text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
               Sau
             </button>
+          </div>
+          <div className="text-sm text-gray-700 dark:text-gray-300 mt-2 text-center">
+            Hiển thị <span className="font-medium">1</span> đến <span className="font-medium">5</span> trong tổng số <span className="font-medium">156</span> kết quả
           </div>
         </div>
       </div>

@@ -92,13 +92,13 @@ export default function QuanLyKhachHang() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Quản lý khách hàng</h1>
           <p className="text-gray-600 dark:text-gray-300">Quản lý thông tin khách hàng trong hệ thống</p>
         </div>
 
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex flex-col gap-2 sm:flex-row sm:gap-3 w-full sm:w-auto">
           <div className="relative">
             <input
               type="text"
@@ -118,11 +118,11 @@ export default function QuanLyKhachHang() {
           </button>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
-          <div className="p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden p-4 md:p-6">
+          <div className="p-0 md:p-6">
             <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Danh sách khách hàng</h3>
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+              <table className="min-w-full break-words divide-y divide-gray-200 dark:divide-gray-700">
                 <thead className="bg-gray-50 dark:bg-gray-700">
                   <tr>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
