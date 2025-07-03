@@ -159,8 +159,8 @@ export default function BaoCaoDoanhThuPage() {
 
       {/* Filters */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 p-6">
-        <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
-          <div className="flex items-center gap-4">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4 w-full lg:w-auto">
             <div className="flex items-center gap-2">
               <Filter className="w-4 h-4 text-gray-600 dark:text-gray-400" />
               <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Bộ lọc:</span>

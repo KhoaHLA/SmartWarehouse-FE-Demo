@@ -13,13 +13,15 @@ import {
   Clock,
   CheckCircle,
   User,
-  Building
+  Building,
+  Search
 } from 'lucide-react'
 import Link from 'next/link'
 
 export default function BaoCaoCongNoPage() {
   const [selectedPeriod, setSelectedPeriod] = useState('month')
   const [selectedType, setSelectedType] = useState('all')
+  const [searchTerm, setSearchTerm] = useState('')
 
   const debtData = {
     totalReceivable: 850000000,
@@ -274,17 +276,16 @@ export default function BaoCaoCongNoPage() {
 
       {/* Filters */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 p-6">
-        <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
-          <div className="flex items-center gap-4">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4 w-full lg:w-auto">
             <div className="flex items-center gap-2">
               <Filter className="w-4 h-4 text-gray-600 dark:text-gray-400" />
               <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Bộ lọc:</span>
             </div>
-            
             <select
               value={selectedPeriod}
               onChange={(e) => setSelectedPeriod(e.target.value)}
-              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white w-full sm:w-auto"
             >
               {periods.map(period => (
                 <option key={period.value} value={period.value}>{period.label}</option>
@@ -294,7 +295,7 @@ export default function BaoCaoCongNoPage() {
             <select
               value={selectedType}
               onChange={(e) => setSelectedType(e.target.value)}
-              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white w-full sm:w-auto"
             >
               {debtTypes.map(type => (
                 <option key={type.value} value={type.value}>{type.label}</option>
@@ -302,15 +303,15 @@ export default function BaoCaoCongNoPage() {
             </select>
           </div>
 
-          <div className="flex items-center gap-2 px-3 py-2 bg-gray-100 dark:bg-gray-800 rounded-lg">
-            <Calendar className="w-4 h-4 text-gray-600 dark:text-gray-400" />
-            <span className="text-sm text-gray-600 dark:text-gray-400">
-              {new Date().toLocaleDateString('vi-VN', { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-              })}
-            </span>
+          <div className="relative w-full sm:w-64">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Tìm kiếm ..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white w-full"
+            />
           </div>
         </div>
       </div>
