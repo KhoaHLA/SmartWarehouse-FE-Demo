@@ -63,3 +63,5 @@ QuanLyKho/
 - `npm run build` - Build production
 - `npm run start` - Chạy production server
 - `npm run lint` - Kiểm tra lỗi code
+
+Nếu có góp ý gì hãy liên lạc cho chúng tôi
